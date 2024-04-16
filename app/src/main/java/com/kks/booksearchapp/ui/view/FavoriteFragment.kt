@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kks.booksearchapp.databinding.FragmentFavoriteBinding
 import com.kks.booksearchapp.ui.adapter.BookSearchAdapter
 import com.kks.booksearchapp.ui.viewmodel.BookSearchViewModel
+import com.kks.booksearchapp.util.collectLatestStateFlow
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
@@ -37,7 +38,25 @@ class FavoriteFragment : Fragment() {
         setupRecyclerView()
         setupTouchHelper(view)
 
-        bookSearchViewModel.favoriteBooks.observe(viewLifecycleOwner) { books ->
+//        bookSearchViewModel.favoriteBooks.observe(viewLifecycleOwner) { books ->
+//            bookSearchAdapter.submitList(books)
+//        }
+
+//        lifecycleScope.launch {
+//            bookSearchViewModel.favoriteBooks.collectLatest { books ->
+//                bookSearchAdapter.submitList(books)
+//            }
+//        }
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                bookSearchViewModel.favoriteBooks.collectLatest { books ->
+//                    bookSearchAdapter.submitList(books)
+//                }
+//            }
+//        }
+
+        collectLatestStateFlow(bookSearchViewModel.favoriteBooks) { books ->
             bookSearchAdapter.submitList(books)
         }
     }

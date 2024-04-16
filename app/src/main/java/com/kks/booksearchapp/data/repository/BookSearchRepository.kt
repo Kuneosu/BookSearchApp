@@ -1,8 +1,8 @@
 package com.kks.booksearchapp.data.repository
 
-import androidx.lifecycle.LiveData
 import com.kks.booksearchapp.data.model.Book
 import com.kks.booksearchapp.data.model.SearchResponse
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface BookSearchRepository {
@@ -19,5 +19,5 @@ interface BookSearchRepository {
 
     suspend fun deleteBook(book: Book)
 
-    fun getFavoriteBook(): LiveData<List<Book>>
+    fun getFavoriteBook(): Flow<List<Book>>
 }

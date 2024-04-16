@@ -9,6 +9,9 @@ import com.kks.booksearchapp.data.model.Book
 import com.kks.booksearchapp.data.model.SearchResponse
 import com.kks.booksearchapp.data.repository.BookSearchRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class BookSearchViewModel(
@@ -38,7 +41,9 @@ class BookSearchViewModel(
         bookSearchRepository.deleteBook(book)
     }
 
-    val favoriteBooks: LiveData<List<Book>> = bookSearchRepository.getFavoriteBook()
+    //    val favoriteBooks: Flow<List<Book>> = bookSearchRepository.getFavoriteBook()
+    val favoriteBooks: StateFlow<List<Book>> = bookSearchRepository.getFavoriteBook()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), listOf())
 
     // SavedState
     var query = String()
