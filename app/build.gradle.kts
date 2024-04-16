@@ -4,6 +4,8 @@ plugins {
 //    id("com.google.devtools.ksp").version("1.6.10-1.0.4")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -85,4 +87,8 @@ dependencies {
 
     // Recyclerview
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 }
